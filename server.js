@@ -6,7 +6,11 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allows your frontend to talk to the backend from anywhere
+  }),
+);
 app.use(express.json()); // Allows parsing of JSON request bodies
 
 app.use("/api/items", require("./routes/itemRoutes.js"));
