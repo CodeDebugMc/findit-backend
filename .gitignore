@@ -1,0 +1,17 @@
+# Ignore local environment config files
+.env
+.env.local
+
+# Ignore package manager dependencies
+node_modules/
+jspm_packages/
+
+# Ignore build outputs and log files
+/dist
+/build
+*.log
+npm-debug.log*
+
+# Ignore OS-specific system files
+.DS_Store
+Thumbs.db
