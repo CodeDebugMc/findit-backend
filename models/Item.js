@@ -6,6 +6,7 @@ const ItemSchema = new mongoose.Schema({
   type: { type: String, enum: ["Lost", "Found"], required: true },
   category: { type: String, required: true },
   location: { type: String, required: true },
+  contact: { type: String, required: true },
   image: { type: String },
   dateReported: { type: Date, default: Date.now },
   status: { type: String, enum: ["Active", "Resolved"], default: "Active" },
