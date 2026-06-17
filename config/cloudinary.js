@@ -1,5 +1,5 @@
 const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const CloudinaryStorage = require("multer-storage-cloudinary");
 const multer = require("multer");
 
 // Configure Cloudinary Credentials
@@ -14,7 +14,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "lost_and_found_items", // Folder name inside Cloudinary
-    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+    allowedFormats: ["jpg", "png", "jpeg", "webp"],
   },
 });
 

@@ -16,19 +16,24 @@ cloudinary.config({
 // 'image' must match the 'name' attribute of the file input on the frontend
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const itemData = {
-      title: req.body.title,
-      description: req.body.description,
-      type: req.body.type,
-      category: req.body.category,
-      location: req.body.location,
-      // If a file was uploaded, read the Cloudinary path URL, otherwise default to empty string
-      image: req.file ? req.file.path : "",
-      contact: req.body.contact,
-    };
+    const { title, description, type, category, location, contact } = req.body;
 
-    const newItem = new Item(itemData);
+    const newItem = new Item({
+      title,
+      description,
+      type,
+      category,
+      location,
+      contact,
+      image: req.file ? req.file.path : "",
+      publicId: req.file ? req.file.filename : "",
+    });
+
     const item = await newItem.save();
+
+    // 🔥 REAL-TIME BROADCAST: Send the new item to all connected clients
+    req.io.emit("item-added", item);
+
     res.status(201).json(item);
   } catch (err) {
     res.status(500).json({ error: err.message });
